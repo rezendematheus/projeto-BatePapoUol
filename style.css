@@ -67,3 +67,8 @@ status{
 .b {
     font-weight: 400;
 }
+chat {
+    width: 100%;
+    height: auto;
+}
+
