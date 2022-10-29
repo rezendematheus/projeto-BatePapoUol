@@ -14,6 +14,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 23;
 
 }
 header img{
@@ -39,6 +40,7 @@ footer{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    z-index: 42;    
 }
 footer ion-icon{
     width: 26px;
@@ -54,21 +56,41 @@ input::placeholder{
     font-style: italic;
 
 }
-message {
+message, status, private_message {
     width: 100%;
-    height: 40px;
+    min-height: 40px;
+    max-height: 63px;
     background-color: #FFFFFF;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    
 }
-status{
-    width: 100%;
-    height: 40px;
+status {
     background-color: #dcdcdc;
+
 }
-.b {
-    font-weight: 400;
+private_message{
+    background-color: #FFDEDE;
+}
+
+span {
+    font-weight: 700;
+}
+p{
+    margin: 0px 9px 0px 8px;
 }
 chat {
     width: 100%;
     height: auto;
+    margin-bottom: 80px;
+    z-index: 2;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+time {
+    color: #AAAAAA;
+
 }
 
