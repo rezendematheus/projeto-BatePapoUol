@@ -1,19 +1,16 @@
 let type; let time; let from; let to; let text; let userStatus; let nome; let data;
-const message = `<${type}>${time} <span>${from}</span> para <span>${to}</span> ${text}</${type}>`
-const status = `<${type}>${time} <span>${from}</span> entrou na sala...</${type}>`
 
 pedirNome();    
 
 function html(){
     document.querySelector("header").innerHTML = ` <img src="./img/logo 1.png" alt=""> <ion-icon  name="people-outline"></ion-icon>`
-    document.querySelector("footer").innerHTML =  `<input type="text" placeholder="Escreva aqui..."> <ion-icon name="paper-plane-outline"></ion-icon>`   
+    document.querySelector("footer").innerHTML =  `<input type="text" placeholder="Escreva aqui..."> <ion-icon class = "sender" onclick="enviaMensagem()" name="paper-plane-outline"></ion-icon>`   
 }
 
 html()
 
 function mandaStatus(){
     axios.post("https://mock-api.driven.com.br/api/v6/uol/status", nome);
-    
 }
 
 function buscaMensagens(){
@@ -36,6 +33,19 @@ function buscaMensagens(){
     })
 }
 
+function enviaMensagem() {
+    const texto = document.querySelector("input").value
+    document.querySelector("input").value = ""
+    let message = {from: nome.name, to: "Todos", text:texto, type:"message"}
+    axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", message)
+    .then((response) => console.log(response), buscaMensagens())
+    .catch((error) => {if(error.status ==! 200){
+        console.log(error)
+        window.location.reload()
+    }
+    } 
+)
+}
 
 function pedirNome (){
     nome = {
@@ -52,9 +62,9 @@ function pedirNome (){
     promise.then(function(response){
         //Em caso de sucesso
         console.log(response);
-        setInterval(mandaStatus, 4000);
+        setInterval(mandaStatus, 2000);
         buscaMensagens();
-        setInterval(buscaMensagens, 5000, response)
+        setInterval(buscaMensagens, 5000, response) 
     })
 }
 
