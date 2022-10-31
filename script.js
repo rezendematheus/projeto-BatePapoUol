@@ -20,14 +20,13 @@ function buscaMensagens(){
         data = response.data
         data.forEach((element) => {
             
-            const mensagem = document.querySelector("chat").innerHTML += `<${element.type}><p><time>(${element.time})</time> <span>${element.from}</span> para <span>${element.to}</span> ${element.text}</p></${element.type}>`;
-            
+            if(element.to === "Todos" || element.to === nome){
+                document.querySelector("chat").innerHTML += `<${element.type}><p><time>(${element.time})</time> <span>${element.from}</span> para <span>${element.to}</span> ${element.text}</p></${element.type}>`;
+            }
         })
-        document.querySelector("chat").lastChild.scrollIntoView()
+        document.querySelector  ("chat").lastChild.scrollIntoView()
     },
     )
-
-    
     response.catch(function(error){
         console.log(error)
     })
@@ -64,7 +63,7 @@ function pedirNome (){
         console.log(response);
         setInterval(mandaStatus, 2000);
         buscaMensagens();
-        setInterval(buscaMensagens, 5000, response) 
+        setInterval(buscaMensagens, 5000, response);
     })
 }
 
